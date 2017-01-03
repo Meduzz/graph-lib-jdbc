@@ -8,8 +8,9 @@ import se.kodiak.tools.graphs.Implicits._
 
 class PgSqlStorageDelegateTest extends FunSuite with BeforeAndAfterAll {
 	val db = "jdbcTest"
+	val prefix = "graph"
 
-	implicit val edges = EdgeStorage(PgSqlStorageDelegate(db))
+	implicit val edges = EdgeStorage(PgSqlStorageDelegate(db, prefix))
 	implicit val graph = Graph(edges)
 
 	override protected def beforeAll() = {
@@ -19,7 +20,7 @@ class PgSqlStorageDelegateTest extends FunSuite with BeforeAndAfterAll {
 	test("edges are stored properly") {
 		val result = addOne("1", "2", "1")
 
-		val fresh = EdgeStorage(PgSqlStorageDelegate(db))
+		val fresh = EdgeStorage(PgSqlStorageDelegate(db, prefix))
 		assert(fresh.edges.nonEmpty, "At least one edge was expected.")
 	}
 

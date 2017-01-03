@@ -5,14 +5,14 @@ import se.kodiak.tools.graphs.edge.EdgeStorageDelegate
 import se.kodiak.tools.graphs.model.{Edge, Node, Relation}
 
 object PgSqlStorageDelegate {
-	def apply(db:String):PgSqlStorageDelegate = new PgSqlStorageDelegate(db)
+	def apply(db:String, prefix:String):PgSqlStorageDelegate = new PgSqlStorageDelegate(db, prefix)
 }
 
 case class DbEdge(graph:String, start:String, relationId:String, relationType:String, end:String)
 
-class PgSqlStorageDelegate(val db:String) extends EdgeStorageDelegate {
+class PgSqlStorageDelegate(val db:String, val prefix:String) extends EdgeStorageDelegate {
 
-	val ctx = new JdbcContext[PostgresDialect, CamelCase]("graph")
+	val ctx = new JdbcContext[PostgresDialect, CamelCase](prefix)
 
 	import ctx._
 

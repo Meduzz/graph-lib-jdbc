@@ -1,6 +1,6 @@
 name := "Graph-JDBC"
 
-version := "20170101"
+version := "20170103"
 
 scalaVersion := "2.11.7"
 
