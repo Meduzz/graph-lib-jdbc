@@ -1,6 +1,6 @@
 name := "Graph-JDBC"
 
-version := "20170103"
+version := "20170529"
 
 scalaVersion := "2.11.7"
 
@@ -16,7 +16,7 @@ resolvers += "se.kodiak.tools" at "http://yamr.kodiak.se/maven"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 
-libraryDependencies += "se.kodiak.tools" %% "graph" % "20161228"
+libraryDependencies += "se.kodiak.tools" %% "graph" % "20170528"
 
 libraryDependencies += "org.postgresql" % "postgresql" % "9.4.1208"
 

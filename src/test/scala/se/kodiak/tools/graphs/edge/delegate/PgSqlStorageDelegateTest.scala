@@ -36,7 +36,7 @@ class PgSqlStorageDelegateTest extends FunSuite with BeforeAndAfterAll {
 	def addOne(start:String, end:String, rel:String):Edge = {
 		val first = Node(start)
 		val second = Node(end)
-		val relation = Relation(rel, "SPAM")
+		val relation = Relation("SPAM")
 		edges.add(first, relation, second)
 	}
 }

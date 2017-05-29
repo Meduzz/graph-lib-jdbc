@@ -8,7 +8,7 @@ object PgSqlStorageDelegate {
 	def apply(db:String, prefix:String):PgSqlStorageDelegate = new PgSqlStorageDelegate(db, prefix)
 }
 
-case class DbEdge(graph:String, start:String, relationId:String, relationType:String, end:String)
+case class DbEdge(graph:String, start:String, relationType:String, end:String)
 
 class PgSqlStorageDelegate(val db:String, val prefix:String) extends EdgeStorageDelegate {
 
@@ -40,13 +40,13 @@ class PgSqlStorageDelegate(val db:String, val prefix:String) extends EdgeStorage
 	}
 
 	private def insert(edge:Edge) = quote {
-		jdbc.insert(lift(DbEdge(db, edge.start.id, edge.relation.id, edge.relation.relType, edge.end.id)))
+		jdbc.insert(lift(DbEdge(db, edge.start.id, edge.relation.relType, edge.end.id)))
 	}
 
 	private def delete(edge:Edge) = quote {
-		jdbc.filter(e => e.graph == lift(db) && e.start == lift(edge.start.id) && e.relationId == lift(edge.relation.id) && e.relationType == lift(edge.relation.relType) && e.end == lift(edge.end.id)).delete
+		jdbc.filter(e => e.graph == lift(db) && e.start == lift(edge.start.id) && e.relationType == lift(edge.relation.relType) && e.end == lift(edge.end.id)).delete
 	}
 
-	private def edge2Edge(edge:DbEdge):Edge = Edge(Node(edge.start), Relation(edge.relationId, edge.relationType), Node(edge.end))
+	private def edge2Edge(edge:DbEdge):Edge = Edge(Node(edge.start), Relation(edge.relationType), Node(edge.end))
 
 }
