@@ -49,4 +49,5 @@ class PgSqlStorageDelegate(val db:String, val prefix:String) extends EdgeStorage
 
 	private def edge2Edge(edge:DbEdge):Edge = Edge(Node(edge.start), Relation(edge.relationType), Node(edge.end))
 
+	override def close():Unit = ctx.close()
 }
